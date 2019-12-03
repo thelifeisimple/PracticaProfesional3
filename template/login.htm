@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../static/css/login.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet"/>	
+    <link href="https://fonts.googleapis.com/css?family=Just+Another+Hand" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Login</title>
+
+    <script type="text/javascript">
+    
+      /*
+       * Función para validar una dirección de correo
+       * Tiene que recibir el identificador del formulario
+       */
+     
+      function validateForm()
+      {
+          var username = document.getElementById("form-username").value;
+          var password = document.getElementById("form-password").value;
+
+          if (username.length == 0){
+            alert("El usuario es obligatorio");
+            return false;
+          }
+          if (username.length > 8){
+            alert("El usuario debe ser de 8 caracteres");
+            return false;  
+          }
+
+          if (password.length == 0){
+            alert("El password es obligatorio");
+            return false;
+          }
+
+         return true;
+  
+      }
+      //-->
+    </script>
+    <link href="../static/css/signup.css" rel="stylesheet">
+</head>
+<body>
+
+        <div class="container"> 
+               
+            <div class="row">
+                <div class="col-md-6">
+                  <h1 id = "titulo1" class="text-center">Bienvenidos a Nahual</h1>   
+                  <h1 id = "titulo1" class="text-center"> Ingresar</h1>
+                    <form method="post" onsubmit="return validateForm()">   
+                    <i class="fa fa-lock"></i>
+                    <form role="form"  method="post" class="login-form">
+                      <div class="form-group">
+                        <p>Usuario</p>
+                        <label class="sr-only" for="form-username">Usuario</label>
+                        <input type="text" name="form-username" placeholder="ingrese su usuario" class="form-username form-control" id="form-username">
+                      
+                      <div class="form-group">
+                        <p>Clave</p>
+                        <label class="sr-only" for="form-password">Password</label>
+                        <input type="password" name="form-password" placeholder="ingrese su clave" class="form-password form-control" id="form-password">
+                      
+                          <button type="submit" class="btn">Ingresar</button>
+                      </div>
+                    </form>
+                  </div>
+                  </div>
+                  <div  class="col-md-6">
+                    <img src="C:\Users\Administrador\Desktop\Final_PP3\Static\img\proyecto-nahual_Big.png">
+                  </div>
+                  </div>
+                </div>
+</body>
+</html>
+
