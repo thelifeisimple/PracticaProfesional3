@@ -1,9 +1,9 @@
 body {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
-	font-family: 'Amatic SC', cursive;
+	font-family: 'Roboto Slab', serif;
 	font-size: 30%;
-	background-color: ;
+	background-color:  rgba(82, 81, 83, 0.15);
   }
 
 #dive{
@@ -11,6 +11,9 @@ body {
 }  
   h3 {
 	margin-top: 2rem;
+	font-family: 'Roboto Slab', serif;
+	font-size: 40%;
+
   }
   
   .row {

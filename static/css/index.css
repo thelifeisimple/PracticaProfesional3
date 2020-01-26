@@ -2,9 +2,7 @@
 
   body{
 		margin: auto;
-		background-color:  #300053;
-		border: 30px solid #670a849e;
-		font-family: 'Amatic SC', cursive;
+		font-family: 'Roboto Slab', serif;
 		font-size: 40px;
 		text-align: center;
 }

@@ -1,193 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-
-    <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="jquery-ui-1.8.6.min.js"></script>
-    <script type="text/javascript">
-      $(function() {
-      $('#form-birthDate').datepicker({dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-100:+0'});
-    });
-
-   <!--
-    /*
-     * Función para validar una dirección de correo
-     * Tiene que recibir el identificador del formulario
-     */
-    function validateMailForm(idMail)
-    {
-      //Creamos un objeto 
-      object=document.getElementById(idMail);
-      valueForm=object.value;
-     
-      // Patron para el correo
-      var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-      if(valueForm.search(patron)==0)
-      {
-        //Mail correcto
-        object.style.color="#000";
-        return;
-      }
-      //Mail incorrecto
-      object.style.color="#f00";
-
-    }
-
-    function validateMail()
-    {
-      //Creamos un objeto 
-      object=document.getElementById("form-email");
-      valueForm=object.value;
-     
-      // Patron para el correo
-      var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-      if(valueForm.search(patron)==0)
-      {
-        //Mail correcto
-        object.style.color="#000";
-        return true;
-      }
-      //Mail incorrecto
-      object.style.color="#f00";
-      return false;
-
-    }
-    function validatePassword()
-    {
-      var p1 = document.getElementById("form-password").value;
-      var p2 = document.getElementById("form-password2").value;
-
-      var espacios = false;
-      var cont = 0;
-      
-      while (!espacios && (cont < p1.length)) {
-        if (p1.charAt(cont) == " ")
-          espacios = true;
-        cont++;
-      }
-      
-      if (espacios) {
-        alert ("La contraseña no puede contener espacios en blanco");
-        return false;
-      }
-
-      if (p1.length == 0 || p2.length == 0) {
-        alert("Los campos de la password no pueden quedar vacios");
-        return false;
-      }
-
-      if (p1 != p2) {
-        alert("Las passwords deben de coincidir");
-        return false;
-      } else {
-        return true; 
-      }
-    }
-
-    function validateForm()
-    {
-        if (!validateMail()){
-          alert("El mail ingresado no es correcto");
-          return false;
-        }
-
-        if (validatePassword()){
-          return true;
-
-        }
-
-        var nombre = document.getElementById("form-name").value;
-        if (nombre.length == 0){
-          alert("El nombre es obligatorio");
-        }
-
-        var username = document.getElementById("form-username").value;
-        if (username.length == 0){
-          alert("El usuario es obligatorio");
-          return false;
-        }
-        if (username.length > 8){
-          alert("El usuario debe ser de 8 caracteres");
-          return false;  
-        }
-
-       return true;
-
-    }
-    //-->
-  </script>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="../static/imagenes/favicon.ico" type="image/x-icon"/>
+    <link href="./static/css/login.css" rel="stylesheet">
+   
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/js/menu.js"></script>
+    <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../static/css/signup.css" rel="stylesheet">
-
-    <title>Registrarse</title>
+    <title> Registrate </title>
 
 </head>
 
-{% extends "layout.htm" %}
-{% block body %}
+
 <body>
-    <div class="bodyimage">
-     
+
+  	<div class="bodyimage">
+        <header>
+            <div class="menu_bar">
+              <a href="#" class="bt-menu"><span class="icon-list2"></span>Menu</a>
+            </div>
+    
+            <nav>
+              <ul>
+                  <li><a href="#"><span class="icon-house">Inicio</span></a></li>
+                  <li><a href="#"><span class="icon-suitcase">Informacion</span></a></li>
+                  <li><a href="../templates/login.htm"><span class="icon-earth">Ingresar</span></a></li>
+                  <li><a href="../templates/signup.htm"><span class="icon-rocket">Registrarse</span></a></li>
+                  <li><a href="../templates/contact.htm"><span class="icon-mail">Contacto</span></a></li>
+              </ul>
+            </nav>
+         </header>
 
 
+		
 
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2 form-box">  
-                <div class="col-md-12">
-                    <h1 id = "titulo1" class="text-center"> Registrarse</h1>
-                    <form method="post" onsubmit="return validateForm()">
-
-                            <i class="fa fa-lock"></i>
-                           <form role="form"  method="post" class="form-control">
-                            
-                            <div class="form-group">
-                              <p>Nombre</p>
-                              <label class="sr-only" for="form-name">Nombre</label>
-                              <input type="text" name="form-name"  placeholder="Ingrese su nombre" class="form-name form-control" id="form-name">
+                  <div class="col-md-12">
+                      <h1 id = "titulo1" class="text-center"> Registrate</h1>
+                      <div class="form-top-right">
+                              <i class="fa fa-lock"></i>
+                            </div>
                           </div>
-
-                          <div class="form-group">
-                              <p>Fecha Nacimiento</p>
-                              <label class="sr-only" for="form-birthdate">Fecha Nacimiento</label>
-                              <input type="date" name="form-birthdate" placeholder="Ingrese su fecha de nacimiento" class="form-birthdate form-control" id="form-birthdate">
+                          <div class="form-bottom">
+                            <form role="form" action="index.html" method="post" class="login-form">
+                              <div class="form-group">
+                                <label class="sr-only" for="form-username">Ingrese Usuario</label>
+                                <input type="text" name="form-username" placeholder="Usuario..." class="form-username form-control" id="form-username">
+                              </div>
+                              <div class="form-group">
+                                <label class="sr-only" for="form-password">Ingrese Password</label>
+                                <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+                              </div>
+                              <div class="form-group">
+                                      <label class="sr-only" for="form-password">Ingrese Email</label>
+                                      <input type="password" name="form-password" placeholder="Email..." class="form-email form-control" id="form-email">
+                              </div>
+                              <button type="submit" class="btn">Guardar</button>
+                              <button type="cancel" onclick="javascript:window.location='index.html';"  class="btn">Cancelar</button>
+                            </form>
                           </div>
+                      
+                  </div>
+          </div>         
+      </div>                
 
-                          <div class="form-group">
-                              <p>Email</p>
-                              <label class="sr-only" for="form-email">Email</label>
-                              <input type="email" name="form-email" placeholder="Ingrese su email" class="form-email form-control" id="form-email" onKeyUp="javascript:validateMailForm('form-email')">
-                          </div>
-
-                          <div class="form-group">
-                              <p>Usuario</p>
-                              <label class="sr-only" for="form-usuario">Usuario</label>
-                              <input type="text" name="form-username"  placeholder="Ingrese el usuario a utilizar" size=10 class="form-username form-control" id="form-username">
-                          </div>
-
-                          <div class="form-group">
-                              <p>Clave</p>
-                              <label class="sr-only" for="form-password">Clave</label>
-                              <input type="password" name="form-password" placeholder="Ingrese la clave del usuario" size=8  class="form-password form-control" id="form-password">
-                          </div>
-
-                          <div class="form-group">
-                              <p>Repita Clave</p>
-                              <label class="sr-only" for="form-password2">Repita Clave</label>
-                              <input type="password" name="form-password2" placeholder="Repita la clave" size=8   class="form-password form-control" id="form-password2">
-                          </div>
-
-                            <button type="submit" class="btn">Registrarse</button>
-                        </form>
-                                
-                  </form>
-            </div>
-        </div>
-
-      </div>
     </div>
-    
+
+  
 </body>  
-{% endblock %}
 
 </html>
