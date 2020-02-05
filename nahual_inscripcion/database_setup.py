@@ -44,8 +44,8 @@ class User(Base):
     fecha_creacion = Column(DataTime, nullable = False)
     fecha_ultimo_ingreso = Column(DataTime, nullable = False)
     state_user = Column(Boolean, nullable = False)
+    id_ciudad = Column(Integer, primary_key=True)
 
-class 
 
 class TablaRelacional(Base):
     __tablename__ = 'tablaRelacion'
@@ -62,9 +62,29 @@ class Nodo(Base):
     nodoname =Column(String(50), nullable = False)
     dateCreation = Column(DataTime, nullable = False)
 
+class Almuno(Base):
+    __tablename__ = 'alumno'
+
+    dni = Column(Integer, primary_key = True)
+    nombre_Y_Apaellido = Column(Integer, nullable = False)
+    nodoname =Column(String(50), nullable = False)
+    fecha_Alta = Column(DataTime, nullable = False)
+    telefono = Column(Integer, nullable = True)
+    fecha_Nacimiento = Column(DataTime, nullable = False)
+    state_almun = Column(Boolean, nullable = False)
+    trabajo_sistemas = Column(Boolean, nullable = False)
+    lugar_trabajo = Column(String, nullable = False)
+    experiencia_sistemas = Column(Boolean, nullable = False)
+    lugar_experiencia = Column(String, nullable = False)
+    id_estudio = Column(Integer, primary_key = True)
+
 class Estudio(Base):
 
-    __tablename__ = ''
+    __tablename__ = 'estudio'
+    id_estudio = Column(Integer, primary_key = True)
+    nombre_nivel = Column(String, nullable = False)
+    dni = Column(Integer, primary_key = True)
+    estudia = Column(Boolean, nullable = False)
 
 class Profesores(Base):
     __tablename__ = 'profesores'
