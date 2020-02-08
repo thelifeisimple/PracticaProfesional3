@@ -132,7 +132,7 @@ def agregarNodo():
 @app.route('/', methods = ['GET'])
 @app.route('/public/', methods = ['GET'])
 def showMain():
-    posts = session.query(Blog).all()
+    posts = session.query(User).all()
     
     if 'username' in login_session:
         username = login_session['username']

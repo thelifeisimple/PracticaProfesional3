@@ -1,10 +1,10 @@
 import sys
 import datetime
 import sqlalchemy
-from sqlalchemy import Column, Integer, String, DataTime, Boolean #,foreignKey
+from sqlalchemy import Column, Integer, String, DateTime, Boolean #,foreignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationshipsql
-from sqlalchemy import creat_engine
+from sqlalchemy.orm import relationship
+from sqlalchemy import create_engine
 
 Base = declarative_base()
 
@@ -23,7 +23,7 @@ class Curso(Base):
 
     id_curso = Column(Integer, primary_key = True)
     name_curso = Column(Integer, nullable = False)
-    anio = Column(DataTime, nullable = False)
+    anio = Column(DateTime, nullable = False)
     cuatrimestre = Column(Integer, nullable = False)
 
 class Lugares (Base):
@@ -41,8 +41,8 @@ class User(Base):
     username = Column(String(50), nullable = False)
     password = Column(String(250), nullable = False)
     roll = Column(String(250), nullable = False)
-    fecha_creacion = Column(DataTime, nullable = False)
-    fecha_ultimo_ingreso = Column(DataTime, nullable = False)
+    fecha_creacion = Column(DateTime, nullable = False)
+    fecha_ultimo_ingreso = Column(DateTime, nullable = False)
     state_user = Column(Boolean, nullable = False)
     id_ciudad = Column(Integer, primary_key=True)
 
@@ -60,7 +60,7 @@ class Nodo(Base):
     id_nodo = Column(Integer, primary_key = True)
     id_pais = Column(Integer, nullable = False)
     nodoname =Column(String(50), nullable = False)
-    dateCreation = Column(DataTime, nullable = False)
+    dateCreation = Column(DateTime, nullable = False)
 
 class Almuno(Base):
     __tablename__ = 'alumno'
@@ -68,9 +68,9 @@ class Almuno(Base):
     dni = Column(Integer, primary_key = True)
     nombre_Y_Apaellido = Column(Integer, nullable = False)
     nodoname =Column(String(50), nullable = False)
-    fecha_Alta = Column(DataTime, nullable = False)
+    fecha_Alta = Column(DateTime, nullable = False)
     telefono = Column(Integer, nullable = True)
-    fecha_Nacimiento = Column(DataTime, nullable = False)
+    fecha_Nacimiento = Column(DateTime, nullable = False)
     state_almun = Column(Boolean, nullable = False)
     trabajo_sistemas = Column(Boolean, nullable = False)
     lugar_trabajo = Column(String, nullable = False)
