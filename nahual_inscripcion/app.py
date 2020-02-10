@@ -89,8 +89,24 @@ def inscripcion():
         return render_template('formulario1.htm')
     else:
         if request.method == 'POST':
-            
 
+            nuevoAlumno = Alumno(
+            nombre = request.form['nombre'],
+            apellido = request.form['apellido'],
+            mail = request.form['mail'],
+            dni = request.form['dni'],
+            fecha_nac = request.form['fecha_nac'],
+            nacionalidad = request.form['nacionalidad'],
+            telefono = request.form['telefono'],
+            residencia = request.form['residencia'],
+            otro = request.form['otro'],
+            nombre_nodo = request.form['nombre_nodo'],
+            trabaja_actualmente = request.form['trabaja_actualmente'],
+            donde_trabaja = request.form['donde_trabaja'])
+            session.add(nuevoAlumno)
+            session.commit()
+
+            return redirect(url_for('formulario2.htm'))
 
 # Crear usuario
 @app.route('/registrar', methods=['GET','POST'])

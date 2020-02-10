@@ -28,9 +28,8 @@
 
         <div class="well configurator">
            
-          <form>
-    
-
+          <form method="POST">
+  
             <div class="col-md-12">
 
               <div class="form-group">
@@ -54,7 +53,7 @@
               </div>
 
               <div class="form-group">
-                <label for="date">Fecha de nacimiento</label>
+                <label for="fecha_nac">Fecha de nacimiento</label>
                 <input type="date" class="form-control" id="date" value="" placeholder="xx/xx/xxxx" >
               </div>
 
@@ -96,11 +95,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="residen">¿Cual?</label>
+                    <label for="otro">¿Cual?</label>
                     <input type="text" class="form-control" id="which" value="" placeholder="¿cual?">
                   </div>
                   <div class="form-group">
-                      <label for="residencia">Nodo</label>
+                      <label for="nombre_nodo">Nodo</label>
                       <select name="select">
                         <option value="v1" selected>Ninguno</option>
                         <option value="v2">Banfield</option>
@@ -117,7 +116,7 @@
                     </div>
 
               <div class="form-group">
-                  <label for="trabajo">¿Trabajas Actualmente?</label>
+                  <label for="trabaja_actualmente">¿Trabajas Actualmente?</label>
                   <select name="select">
                     <option value="v1" selected></option>
                     <option value="v2">Si</option>
@@ -127,6 +126,7 @@
                   <label for="donde">¿Donde?</label>
                   <input type="text" class="form-control" id="where" value="" placeholder="¿Donde?">
                 </div>
+              <!--Hacer funcion para renderizar template y almacenar la info del form-->  
               <form method="get" action="xxxx">
               <button type="button" class="btn btn-success">Siguiente</button>
               </form>
