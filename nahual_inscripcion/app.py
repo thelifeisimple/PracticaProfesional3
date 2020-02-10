@@ -3,8 +3,12 @@ from flask import request, redirect, make_response
 from flask import session as login_session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import (MetaData, Table, Column,
+                        Integer, String, Sequence,
+                        create_engine,
+                        insert)
 from functools import wraps
-from database_setup import Base, Nahual_inscripciones, User, Nodo
+from database_setup import Base, CursoRelacion, Curso, User, Nodo, Lugar, TablaRelacion, Alumno, Estudio, Profesor
 import random
 import string
 import json
@@ -20,7 +24,8 @@ Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
-
+#por lo menos ya anda ja jajajaja
+#dejame googlear algo
 @app.route('/login', methods= ['GET', 'POST'] )
 def login():
 
@@ -29,22 +34,22 @@ def login():
                 string.ascii_uppercase + string.digits) for x in range(50))
         #store it in session for later use
         login_session['state'] = state
-        return render_template('login.htm', STATE = state)
+        return render_template('login.html', STATE = state)
     else:
         if request.method == 'POST':
             print("Dentro del POST login")
 
-            user = session.query(User).filter_by(
+            user = session.query(user).filter_by(
                 username = request.form['username'],
                 password = request.form['password']).first()
 
-            if not user:
-                error = "¡Usuario no registrado!"
-                return render_template('login.htm', error = error)
-            else:
-                print ("Dentro del user")
-                login_session['username'] = request.form['username']
-                return render_template('admin.htm', username = login_session['username'])
+        if not user:
+            error = "Usuario no registrado"
+            return render_template('login.html', error = error)
+        else:
+            print ("Dentro del user")
+            login_session['username'] = request.form['username']
+            return render_template('admin.htm', username = login_session['username'])
 
 
 def login_required(f):
@@ -76,6 +81,16 @@ def logout():
     del login_session ['username']
 
     return render_template('pagPrincipalNahual.htm')
+
+@app.route('/inscripcion', methods=['GET','POST'])
+def inscripcion():
+    
+    if request.method == 'GET':
+        return render_template('formulario1.htm')
+    else:
+        if request.method == 'POST':
+            
+
 
 # Crear usuario
 @app.route('/registrar', methods=['GET','POST'])
@@ -121,7 +136,7 @@ def agregarNodo():
         return render_template('addNode.htm')
     else:
         if request.method == 'POST':
-            post = Nodo(
+            post = Nodo (
                 nodoname = request.form['nodoname'],
                 dateCreation = datetime.datetime.now())
             session.add(post)
@@ -132,26 +147,20 @@ def agregarNodo():
 @app.route('/', methods = ['GET'])
 @app.route('/public/', methods = ['GET'])
 def showMain():
-    posts = session.query(User).all()
-    
-    if 'username' in login_session:
-        username = login_session['username']
-        return render_template('administracion.htm', posts = posts, username = username)
-    else:
-        return render_template('adminitracion.htm', posts = posts)
+    #posts = session.query(User).all()
+    return render_template('administracion.html')
+    #if 'username' in login_session:
+    #    username = login_session['username']
+    #    return render_template('administracion.html', posts = posts, username = username)
+    #else:
+        #return render_template('administracion.html', posts = posts)
 
 if __name__ == '__main__':
-    app.secret_key = "secret key"
+    
+    app.secret_key = 'secret key'
     app.debug = False
-    app.run(host = '0.0.0.0', port = 500)
+    app.run(host = '0.0.0.0', port = 8000, debug=True)
+    
+    
 # ELEGIR LAS MODIFICACIONES QUE QUIERO 
 # DE ACUERDO A LO QUE QUIERO HACER
-
-
-
-
-
-
-
-
-

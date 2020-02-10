@@ -11,8 +11,8 @@ Base = declarative_base()
 #Falta oregnizar exactamente los datos en diferentes tabla
 
 
-class Cursos_Relacional(Base):
-    __tablename__ = 'cursosRelacional'
+class CursoRelacion(Base):
+    __tablename__ = 'cursoRelacion'
 
     id_curso = Column(Integer, primary_key = True)
     id_alumna = Column(Integer, primary_key = True)
@@ -26,8 +26,8 @@ class Curso(Base):
     anio = Column(DateTime, nullable = False)
     cuatrimestre = Column(Integer, nullable = False)
 
-class Lugares (Base):
-    __tablename__ = 'lugares'
+class Lugar (Base):
+    __tablename__ = 'lugar'
 
     id_ciudad = Column(Integer, primary_key=True)
     name_ciudad = Column(String(250), nullable=False)
@@ -47,7 +47,7 @@ class User(Base):
     id_ciudad = Column(Integer, primary_key=True)
 
 
-class TablaRelacional(Base):
+class TablaRelacion(Base):
     __tablename__ = 'tablaRelacion'
 
     id_nodo = Column(Integer, primary_key = True)
@@ -62,7 +62,7 @@ class Nodo(Base):
     nodoname =Column(String(50), nullable = False)
     dateCreation = Column(DateTime, nullable = False)
 
-class Almuno(Base):
+class Alumno(Base):
     __tablename__ = 'alumno'
 
     dni = Column(Integer, primary_key = True)
@@ -86,11 +86,11 @@ class Estudio(Base):
     dni = Column(Integer, primary_key = True)
     estudia = Column(Boolean, nullable = False)
 
-class Profesores(Base):
-    __tablename__ = 'profesores'
+class Profesor(Base):
+    __tablename__ = 'profesor'
 
     id_profesor = Column(Integer, primary_key = True)
     nombre_profesor = Column(String(50), nullable = False)
 
-engine = sqlalchemy.create_engine('sqlite:///data/inscripciones.db')
+engine = sqlalchemy.create_engine('sqlite:///inscripciones_nahual.db')
 Base.metadata.create_all(engine)        
