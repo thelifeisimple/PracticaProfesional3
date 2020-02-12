@@ -79,14 +79,18 @@ class Alumno(Base):
     experiencia_sistemas = Column(Boolean, nullable = False)
     lugar_experiencia = Column(String, nullable = False)
     id_estudio = Column(Integer, foreign_key = True)
+    dispositivo = Column(Boolean, nullable = False)
+    motivaciones = Column(String, nullable = False)
+    afect_nahual = Column(String, nullable = False)
+    interv_Nahual = Column(String, nullable = False)
 
 class Estudio(Base):
 
     __tablename__ = 'estudio'
     id_estudio = Column(Integer, primary_key = True)
-    nombre_nivel = Column(String, nullable = False)
+    nivel_educacion = Column(String, nullable = False)
     dni = Column(Integer, foreign_key = True)
-    estudia = Column(Boolean, nullable = False)
+    donde_conoce_Nahual = Column(Boolean, nullable = False)
 
 class Profesor(Base):
     __tablename__ = 'profesor'

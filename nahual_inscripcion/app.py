@@ -82,6 +82,7 @@ def logout():
 
     return render_template('pagPrincipalNahual.htm')
 
+#Inicio de instcripción al curso
 @app.route('/inscripcion', methods=['GET','POST'])
 def inscripcion():
     
@@ -107,6 +108,51 @@ def inscripcion():
             session.commit()
 
             return redirect(url_for('formulario2.htm'))
+
+@app.route('/inscripcionII', methods=['GET','POST'])
+def inscripcionII():
+    
+    if request.method == 'GET':
+        return render_template('formulario1.htm')
+    else:
+        if request.method == 'POST':
+
+            nuevoAlumno2 = Alumno (
+            dispositivo = request.form['dispositivo'],
+            experiencia_sistemas = request.form['experiencia_sistemas'],
+            lugar_experiencia = request.form['lugar_experiencia'],
+            trabajo_sistemas = request.form['trabajo_sistemas'],
+            nivel_educacion = request.form['nivel_educacion'],
+            donde_conoce_Nahual = request.form['donde_conoce_Nahual'])
+            session.add(nuevoAlumno2)
+            session.commit()
+
+            nuevoAlumnoEstudio = Estudio (
+            nivel_educacion = request.form['nivel_educacion'],
+            donde_conoce_Nahual = request.form['donde_conoce_Nahual'])
+            session.add(nuevoAlumnoEstudio)
+            session.commit()
+
+            return redirect(url_for('formulario2.htm'))
+
+
+@app.route('/inscripcionIII', methods=['GET','POST'])
+def inscripcionIII():
+    
+    if request.method == 'GET':
+        return render_template('formulario1.htm')
+    else:
+        if request.method == 'POST':
+
+            nuevoAlumno3 = Alumno (
+            motivaciones = request.form['motivaciones'],
+            afect_nahual = request.form['afect_nahual'],
+            interv_Nahual = request.form['interv_Nahual'])
+            session.add(nuevoAlumno3)
+            session.commit()
+
+            return redirect(url_for('formulario2.htm'))
+
 
 # Crear usuario
 @app.route('/registrar', methods=['GET','POST'])
