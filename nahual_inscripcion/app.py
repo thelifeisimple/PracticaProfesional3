@@ -82,7 +82,7 @@ def logout():
 
     return render_template('pagPrincipalNahual.htm')
 
-#Inicio de instcripción al curso
+#Inicio de instcripcion al curso
 @app.route('/inscripcion', methods=['GET','POST'])
 def inscripcion():
     
