@@ -115,6 +115,7 @@ def inscripcionII():
     if request.method == 'GET':
         return render_template('formulario1.htm')
     else:
+
         if request.method == 'POST':
 
             nuevoAlumno2 = Alumno (
@@ -140,7 +141,7 @@ def inscripcionII():
 def inscripcionIII():
     
     if request.method == 'GET':
-        return render_template('formulario1.htm')
+        return render_template('formulario3.htm')
     else:
         if request.method == 'POST':
 
@@ -151,7 +152,7 @@ def inscripcionIII():
             session.add(nuevoAlumno3)
             session.commit()
 
-            return redirect(url_for('formulario2.htm'))
+            return redirect(url_for('formulario3.htm'))
 
 
 # Crear usuario
