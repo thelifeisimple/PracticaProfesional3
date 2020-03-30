@@ -24,8 +24,7 @@ Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
-#por lo menos ya anda ja jajajaja
-#dejame googlear algo
+
 @app.route('/login', methods= ['GET', 'POST'] )
 def login():
 
@@ -85,10 +84,15 @@ def logout():
 #Inicio de instcripcion al curso
 @app.route('/inscripcion', methods=['GET','POST'])
 def inscripcion():
+
+    print ("inside GET")
     
     if request.method == 'GET':
         return render_template('formulario1.htm')
+        
     else:
+        print ("inside Post")
+
         if request.method == 'POST':
 
             nuevoAlumno = Alumno(
@@ -208,6 +212,9 @@ def agregarNodo():
 
 # Mostrar todo
 @app.route('/', methods = ['GET'])
+def home ():
+    return render_template('login.html')
+    
 @app.route('/public/', methods = ['GET'])
 def showMain():
     #posts = session.query(User).all()
@@ -225,5 +232,3 @@ if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 8000, debug=True)
     
     
-# ELEGIR LAS MODIFICACIONES QUE QUIERO 
-# DE ACUERDO A LO QUE QUIERO HACER
