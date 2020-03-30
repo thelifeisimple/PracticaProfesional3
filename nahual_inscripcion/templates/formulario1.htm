@@ -43,23 +43,23 @@
               </div>
 
               <div class="form-group">
-                <label for="mail">Mail</label>
-                <input type="email" class="form-control" id="mail" value="" placeholder="Mail">
+                <label for="mail">Email</label>
+                <input type="email" class="form-control" name="email" value="" placeholder="Email">
               </div>
 
               <div class="form-group">
                 <label for="dni">Dni</label>
-                <input type="number" class="form-control" id="dni" value="" placeholder="Dni">
+                <input type="number" class="form-control" name="dni" value="" placeholder="Dni">
               </div>
 
               <div class="form-group">
                 <label for="fecha_nac">Fecha de nacimiento</label>
-                <input type="date" class="form-control" id="date" value="" placeholder="xx/xx/xxxx" >
+                <input type="date" class="form-control" name="fecha_nac" value="" placeholder="xx/xx/xxxx" >
               </div>
 
               <div class="form-group">
                 <label for="nacionalidad" >Nacionalidad</label>
-                <select name="select">
+                <select name="nacionalidad">
                   <option value="v1" selected>Ninguno</option>
                   <option value="v2">Argentina</option>
                   <option value="v3">Bolivia</option>
@@ -75,12 +75,12 @@
 
               <div class="form-group">
                 <label for="telefono">Telefono</label>
-                <input type="number" class="form-control" id="phone" value="" placeholder="telefono">
+                <input type="number" class="form-control" name="telefono" value="" placeholder="telefono">
               </div>
 
               <div class="form-group">
                   <label for="residencia">Lugar de residencia</label>
-                  <select name="select">
+                  <select name="residencia">
                     <option value="v1" selected>Ninguno</option>
                     <option value="v2">GBA</option>
                     <option value="v3">CABA</option>
@@ -96,11 +96,11 @@
 
                 <div class="form-group">
                     <label for="otro">¿Cual?</label>
-                    <input type="text" class="form-control" id="which" value="" placeholder="¿cual?">
+                    <input type="text" class="form-control" name="otro" value="" placeholder="¿cual?">
                   </div>
                   <div class="form-group">
                       <label for="nombre_nodo">Nodo</label>
-                      <select name="select">
+                      <select name="nombre_nodo">
                         <option value="v1" selected>Ninguno</option>
                         <option value="v2">Banfield</option>
                         <option value="v3">CABA</option>
@@ -117,14 +117,14 @@
 
               <div class="form-group">
                   <label for="trabaja_actualmente">¿Trabajas Actualmente?</label>
-                  <select name="select">
+                  <select name="trabaja_actualmente">
                     <option value="v1" selected></option>
                     <option value="v2">Si</option>
                     <option value="v3">No</option>
 
               <div class="form-group">
                   <label for="donde">¿Donde?</label>
-                  <input type="text" class="form-control" id="where" value="" placeholder="¿Donde?">
+                  <input type="text" class="form-control" id="donde" value="" placeholder="¿Donde?">
                 </div>
               <!--Hacer funcion para renderizar template y almacenar la info del form-->  
               <button type="submit" class="btn btn-success">Siguiente</button>

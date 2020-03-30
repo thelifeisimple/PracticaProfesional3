@@ -98,7 +98,7 @@ def inscripcion():
             nuevoAlumno = Alumno(
             nombre = request.form['nombre'],
             apellido = request.form['apellido'],
-            mail = request.form['mail'],
+            email = request.form['email'],
             dni = request.form['dni'],
             fecha_nac = request.form['fecha_nac'],
             nacionalidad = request.form['nacionalidad'],
