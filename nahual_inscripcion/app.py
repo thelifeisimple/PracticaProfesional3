@@ -131,11 +131,6 @@ def inscripcionII():
             session.add(nuevoAlumno2)
             session.commit()
 
-            nuevoAlumnoEstudio = Estudio (
-            nivel_educacion = request.form['nivel_educacion'],
-            donde_conoce_Nahual = request.form['donde_conoce_Nahual'])
-            session.add(nuevoAlumnoEstudio)
-            session.commit()
 
             return redirect(url_for('formulario2.htm'))
 
