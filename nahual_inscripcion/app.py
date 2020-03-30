@@ -104,10 +104,9 @@ def inscripcion():
             nacionalidad = request.form['nacionalidad'],
             telefono = request.form['telefono'],
             residencia = request.form['residencia'],
-            otro = request.form['otro'],
             nombre_nodo = request.form['nombre_nodo'],
             trabaja_actualmente = request.form['trabaja_actualmente'],
-            donde_trabaja = request.form['donde_trabaja'])
+            lugar_trabajo = request.form['lugar_trabajo'])
             session.add(nuevoAlumno)
             session.commit()
 

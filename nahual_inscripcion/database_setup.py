@@ -72,6 +72,8 @@ class Alumno(Base):
     nombre_nodo =Column(String(50), nullable = False)
     fecha_Alta = Column(DateTime, nullable = False)
     telefono = Column(Integer, nullable = True)
+    residencia = Column(String, nullable = False)
+    nacionalidad = Column(String, nullable = False)
     fecha_nac = Column(DateTime, nullable = False)
     estado = Column(Boolean, nullable = False)
     trabaja_actualmente = Column(Boolean, nullable = False)

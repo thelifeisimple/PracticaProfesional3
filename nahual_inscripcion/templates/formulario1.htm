@@ -94,10 +94,7 @@
                   </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="otro">¿Cual?</label>
-                    <input type="text" class="form-control" name="otro" value="" placeholder="¿cual?">
-                  </div>
+                
                   <div class="form-group">
                       <label for="nombre_nodo">Nodo</label>
                       <select name="nombre_nodo">
@@ -119,12 +116,12 @@
                   <label for="trabaja_actualmente">¿Trabajas Actualmente?</label>
                   <select name="trabaja_actualmente">
                     <option value="v1" selected></option>
-                    <option value="v2">Si</option>
-                    <option value="v3">No</option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
 
               <div class="form-group">
                   <label for="donde">¿Donde?</label>
-                  <input type="text" class="form-control" id="donde" value="" placeholder="¿Donde?">
+                  <input type="text" class="form-control" name="lugar_trabajo"  placeholder="¿Donde?">
                 </div>
               <!--Hacer funcion para renderizar template y almacenar la info del form-->  
               <button type="submit" class="btn btn-success">Siguiente</button>
