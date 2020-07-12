@@ -1666,7 +1666,7 @@ def inscripcion2():
                                                                 , post_apellido = form_apellido 
                                                                 , post_email = form_email 
                                                                 , post_dni = form_dni 
-                                                                , post_fecha_nac = fecha_nac 
+                                                                , post_fecha_nac = fecha_nac
                                                                 , post_nacionalidad = form_nacionalidad 
                                                                 , post_telefono = form_telefono 
                                                                 , post_residencia = form_residencia 

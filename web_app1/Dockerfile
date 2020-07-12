@@ -1,5 +1,5 @@
 FROM python:3.8-alpine
-COPY ./nahual_inscripcion /app
+COPY ./nahual /app
 WORKDIR /app
 #RUN pip install
 RUN pip install flask
