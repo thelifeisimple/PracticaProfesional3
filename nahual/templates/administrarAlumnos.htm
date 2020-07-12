@@ -1,0 +1,266 @@
+{% extends "layout.htm" %}
+{% block title %}Alumnos{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+
+    <div class="container">
+      <div class="row">
+  
+
+            <h1 style="margin: 0 0 20px 0"> Administración de Alumnos</h1>
+
+         
+
+                <div class="col-md-12">
+                  <form role="form" action="" method="post" class="form-control">
+
+                  <table id="filtros_table" class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <div class="form-group row">
+                          <td>
+                          <div class="form-group">
+                              <label for="form-nodo">Nodo</label>
+                              <select class="form-control" id="form-nodo" name="form-nodo">
+                                 <option value="0" selected>Todos</option>
+                               {% for option in nodoList %}
+                                <option value="{{ option.nodo_id }}">{{ option.nodo_nombre }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                          </td>
+                            <td>
+                              <div class="form-group">
+                                <label for="form-educacion" >Nivel de educación</label>
+                                <select class="form-control" id="form-educacion" name="form-educacion">
+                                    <option value="0" selected>Todos</option>
+                                    {% for option in nivelList %}
+                                     <option value="{{ option.nive_id }}">{{ option.nive_nombre }}</option>
+                                     {% endfor %}
+                                </select>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <label for="form-estado">Estado</label>
+                                  <select id="form-estado" class="form-control" name="form-estado"  >
+                                    <option value="Todos" SELECTED>Todos</option>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Rechazado">Rechazado</option>
+                                  </select>                          
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <label for="form-dni">DNI</label>
+                                  <input type="number" class="form-control" id="form-dni" name="form-dni" value="{{dniSelect}}" placeholder="" >
+                              </div>
+                            </td>
+                            </tr>
+                          <tr>
+                          <td colspan="3"/>
+                          <td>
+                            <button type="submit" name="action" value="buscar" class="btn btn-success">Buscar</button>
+                            <button type="button" name="action" value="limpiar" onclick="fnLimpiarFiltros()" class="btn btn-success">Limpiar</button>
+                        </td>
+
+                        </div>
+                </tr>
+                </thead>
+                </table>
+              </form>
+
+              </div>
+
+
+              {% block content %}
+                {% if listaBusqueda  %}
+
+                  <div class="col-md-12">
+ 
+        
+                    <div class="row alumno align-items-center">
+
+                      <div class="form-row align-items-center">
+                        <table  class="table table-bordered table-light">
+                          {% for fila in listaBusqueda  %}
+                            {% if loop.index == 1 %} 
+                              <thead class="thead-light">
+                                <tr>
+                                      <th colspan=3></th>
+                                      <th>DNI</th>
+                                      <th>Nombre</th>
+                                      <th>Apellido</th>
+                                      <th>Nodo</th>     
+                                      <th>Email</th>
+                                      <th>Telefono</th>
+                                      <th>Fecha Nacimiento</th>
+                                      <th>Estado</th>
+                                      <th>Ciudad</th>
+                                      <th>Educacion</th>
+                                  </tr>
+                              </thead>
+                            {% endif %}
+                          <tbody>
+
+                            <tr>
+                                  <td><a onclick="fnDetalleAlumno('detalle', {{fila.alum_id}})" placeholder="Detalle"><img src="../static/img/grid-detalle.png"></a></td>
+                                  {% if fila.alum_estado == 'Rechazado'%}
+                                    <td colspan=2></td>
+                                  {%else%}
+                                    <td><a onclick="fnDetalleAlumno('editar', {{fila.alum_id}})" placeholder="Modificar"><img src="../static/img/grid-editar.png"></a></td>
+                                    <td><a onclick="fnDetalleAlumno('eliminar', {{fila.alum_id}})" placeholder="Eliminar"><img src="../static/img/grid-eliminar.png"></a></td> 
+                                    <!--<td><button type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  placeholder="Eliminar"><img src="../static/img/grid-eliminar.png"></button></td>-->
+                                    {%endif%}
+                                  <td>{{fila.alum_dni }}</td>
+                                    <!--<th scope="row">{{ fila.alum_dni }}</th>-->
+                                  <td>{{ fila.alum_nombre }}</td>
+                                  <td>{{ fila.alum_apellido }}</td>
+                                  <td><a href="/detalleNodo?nodo={{fila.nodo_id}}" target="_detalle">{{fila.nodo_nombre }}</a></td>
+                                  <td>{{ fila.alum_email }}</td>
+                                  <td>{{ fila.alum_telefono }}</td>
+                                  <td>{{ fila.alum_fecha_nacimiento }}</td>
+                                  <td>{{ fila.alum_estado }}</td>
+                                  <td>{{ fila.ciud_nombre }}</td>
+                                  <td>{{ fila.nive_nombre }}</td>
+
+                              </tr>
+                          {% endfor %}
+
+
+                                 
+
+                          </tbody>
+                        </table>
+                      </div> <!--alumnos-->
+                    </div> <!--row alumno-->
+                 </div> <!-- row-->
+            {% endif %}
+            {% endblock %}
+    </div>
+
+          <!-- Modal -->
+          <div id="confirmModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modalTitle">Modal Header</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p>¿Estado seguro de realizar la operacion?</p>
+                </div>
+                <div class="modal-footer">
+                  <button data-dismiss="modal" id="btCancelar"class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                  <button id="btAceptar" name=""class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        <!-- fin Modal-->  
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js" ></script>
+<script type="text/javascript">
+
+
+  jQuery(document).ready(function($){
+  {% if nodoSelect %}
+      $(document.querySelector("#form-nodo")).find('option[value={{nodoSelect}}]').attr('selected','selected');
+  {% endif %}
+  {% if educacionSelect %}
+      $(document.querySelector("#form-educacion")).find('option[value={{educacionSelect}}]').attr('selected','selected');
+  {% endif %}
+  {% if estadoSelect %}
+        $(document.querySelector("#form-estado")).find('option[value={{estadoSelect}}]').attr('selected','selected');
+    {% endif %}
+    });
+
+function fnLimpiarFiltros(){
+        document.getElementById("form-nodo").selectedIndex = 0;
+        document.getElementById("form-dni").value = '';
+        document.getElementById("form-educacion").selectedIndex = 0;
+        document.getElementById("form-estado").selectedIndex = "Todos";
+
+
+        return true;
+
+}
+
+function fnDetalleAlumno(destino, id) 
+{
+        var w = 00;
+        var h = 600;
+        var left = Number((screen.width/2)-(w/2));
+        var tops = Number((screen.height/2)-(h/2));
+
+        if (destino == "detalle"){
+          window.open("/detalleAlumno?id="+id, 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+          
+        } 
+        if (destino == "editar"){
+          window.open("/editarAlumno?id="+id, 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+        } 
+        if (destino == "eliminar"){
+            // if (confirm("¿Confirma la operacion?")){
+            //   window.open("/eliminarAlumno?id="+id, 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+            // }
+            $('#confirmModal').find('#btCancelar')
+                .off('click').on('click', () => console.log('cancelar', id) );
+
+            $('#confirmModal').find('#btAceptar')
+                            .off('click').on('click', () =>  window.open("/eliminarAlumno?id="+id, 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left) );//console.log('aceptar', id) );
+            
+            $("#modalTitle").html('Rechazar Alumnos');
+
+            $('#confirmModal').modal("show"); 
+        }
+        return false;
+}
+
+function mostrarModal(titulo) {
+  $("#modalTitle").html(titulo);
+  $("#myModal").modal("show");
+}
+          //   $('#myModal').modal("show"); 
+
+        //  $('#myModal .modal-footer button ').on('click','#myModal #btAceptar', function (e) {
+        //    e.preventDefault();
+        //     console.log('confirmed delete');
+        //   return false;
+        //   });
+
+        //  $('#myModal .modal-footer button ').on('click', function(event) {
+        //   var $button = $(event.target); // The clicked button
+        //   $(this).closest('.modal').one('hidden.bs.modal', function() {
+        //     // Fire if the button element 
+        //     console.log('The button that closed the modal is: ', $button);
+        //     //alert($button.innerHTML)
+        //     if ($button == "button#btAceptar.btn.btn-default")
+        //     window.open("/eliminarAlumno?id="+id, 'Alumno', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+       
+        //   });
+        // });
+
+
+function windowClose() {
+    window.location.reload();
+}
+
+
+
+</script> 
+     
+
+{% endblock %}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/nahual.css') }}"> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Just+Another+Hand" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" href="./static/img/favicon.ico" type="image/x-icon">
+    <title>{% block title %}{% endblock %} - Nahual</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container"> 
+        <div class="row">
+
+        <div id="content">{% block body %}{% endblock %}</div>
+
+    </div> <!-- row -->
+    </div> <!-- container -->
+
+      <div id="result"></div>
+                          
+      <div id="errorMsg"></div>
+
+        {% if error%}
+        <br>
+
+        <font size="3" color="red"><h4 id="error">{{error}}</h4></font>
+        {% endif %}
+
+    <div id="footer">
+      {% block footer %}
+      <div class="container"> 
+               
+        <div class="row">
+            <div  class="col-md-12">
+                <br>
+                 &copy; Copyright 2020 by Ana Maria Zuluaga for TicTicSoft. <!-- <a href="http://ticticsoft.com.ar/">you</a>.-->
+            </div>
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+  </body>
+
+  
+</html>
+
+ 
+       

@@ -1,0 +1,187 @@
+
+
+  body{
+		margin: auto;
+		font-family: 'Roboto Slab', serif;
+		font-size: 40px;
+		text-align: center;
+}
+	
+ .bodyimage{
+		
+	padding: 25px;
+	background: url(../imagenes/fondo.jpg);
+	background-repeat: repeat;
+	background-size: auto;
+  }
+
+
+#titulo{
+		font-family: 'Amatic SC', cursive;
+		color: #dbdbdb;
+		-moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 10px 10px 10px 10px;
+		color: #fff;
+		font-size: 60px;
+		text-align: left;
+}
+
+#titulo1{
+		font-family: 'Amatic SC', cursive;
+		color: #dbdbdb;
+		font-size: 60px;
+		text-align: center;
+	}
+
+#titulo2{
+		font-family: 'Amatic SC', cursive;
+		color: #dbdbdb;
+		font-size: 45px;
+
+	}		
+
+#titulo3{
+		font-family: 'Just Another Hand', cursive;
+		color: #dbdbdb;
+		font-size: 35px;
+
+	}	
+
+
+img{
+	display:block;
+	margin:30%;
+	width: 50%;
+}	
+
+ 
+
+
+
+.margin{
+	margin-right: auto;
+}
+
+.centrado {
+	margin: 10px auto;
+	display: block ;
+	border-radius: 50%;
+	border: 20px solid #8f43a79e;
+}
+
+
+
+.img-responsive {
+   width: 300px;
+   height: 300px;
+   border-radius:40%;
+   border:20px solid;
+}
+
+* {
+	margin:0;
+	padding:0;
+}
+  
+header {
+	width:100%;
+}
+ 
+header nav {
+	width:90%;
+	max-width:1000px;
+	margin:20px auto;
+	background:#670a849e;
+	border-radius: 10px 10px 10px 10px;
+}
+ 
+.menu_bar {
+	display:none;
+}
+ 
+header nav ul {
+	float:right;
+	list-style:none;
+	margin-bottom: 20px !important
+}
+ 
+header nav ul li {
+	float:left;
+
+}
+ 
+header nav ul li a {
+	color:#fff;
+	padding:20px;
+	display:block;
+	text-decoration:none;
+}
+ 
+header nav ul li a span {
+	margin-right:10px;
+	font-family: 'Amatic SC', cursive;
+	color: #dbdbdb;
+	font-size: 30px; 
+}
+
+header nav ul li a2 span {
+	margin-right:15px;
+	font-family: 'Amatic SC', cursive;
+	color: #8dd41b;
+	font-size: 30px; 
+}
+ 
+a:hover{
+	text-decoration: none !important;
+	background-color: #670a849e;
+}
+
+section {
+	padding:20px;
+}
+ 
+@media screen and (max-width:800px ) and (min-width:300px) {
+	header nav {
+		width:80%;
+		height:100%;
+		left:-100%;
+		margin:0;
+		position: fixed;
+		
+	}
+ 
+	header nav ul li {
+		display:block;
+		float:none;
+		border-bottom:1px solid rgba(255,255,255, .3);
+	}
+ 
+	.menu_bar {
+		display:block;
+		width:100%;
+		background:#ccc;
+	}
+ 
+	.menu_bar .bt-menu {
+		display:block;
+		padding:20px;
+		background:rgb(76, 56, 83);
+		color:#fff;
+		text-decoration:none;
+		font-weight: bold;
+		font-size:25px;
+		-webkit-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		box-sizing:border-box;
+		font-family: 'Amatic SC', cursive;
+
+	}
+ 
+	.menu_bar span {
+		float:right;
+		font-size:40px;
+	}
+	 
+	
+	
+
+}	

@@ -1,0 +1,187 @@
+{% extends "layout.htm" %}
+{% block title %}Registrarse {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+      <div class="row">
+
+          <div  class="col-md-12">
+                <p> <a href="/index">  <img src="..\static\img\proyecto-nahual_Big.png"></a></p>
+          </div> 
+          
+          <h1 class="text-center">Registrar nuevo usuario</h1>        
+          <br>  
+
+
+          <!-- <div class="col-sm-8 col-sm-offset-2 form-box">  -->
+          <div class="col-md-12">
+
+            <form name="formUsuario" role="form" action="" method="post" class="form-control" onsubmit="return fnValidateForm()">
+              <!-- 
+              <div class="form-group">
+                <label  for="form-usuario">Usuario</label>
+                <input type="text" name="form-usuario" placeholder="ingrese usuario de 8 caracateres" class="form-control" id="form-usuario" value="{{usuario}}" required>
+              </div>-->
+              <div class="form-group">
+                <label  for="form-email">Email</label>
+                <input type="email" name="form-email" placeholder="Ingrese su email" class="form-control" id="form-email" value="{{post_email}}" required>
+                <small id="emailHelp" class="form-text text-muted">Nunca lo compartiremos con nadie mas que tu.</small>
+              </div>
+              <div class="form-group">
+                <label  for="form-clave">Clave</label>
+                <input type="password" name="form-clave" placeholder="Ingrese una clave mayor a 6 caracteres" class="form-control" id="form-clave" value="{{post_clave}}" required>
+              </div>
+              <div class="form-group">
+                <label  for="form-clave2">Confirmar Clave</label>
+                <input type="password" name="form-clave2" placeholder="Repita la clave ingresada" class="form-control" id="form-clave2"  required >
+              </div>
+              <div class="form-group">
+                <label  for="form-nombre">Nombre</label>
+                <input type="nombre" name="form-nombre" placeholder="Ingrese su nombre" class="form-control" id="form-nombre" value="{{post_nombre}}" required>
+              </div>
+              <div class="form-group">
+                <label  for="form-apellido">Apellido</label>
+                <input type="apellido" name="form-apellido" placeholder="Ingrese su apellido..." class="form-control" id="form-apellido" value="{{post_apellido}}" required>
+              </div>
+              
+              <div class="form-group">
+                <label  for="form-telefono">Celular</label>
+                <input type="telefono" name="form-telefono" placeholder="Ej. 1164313243  (sin el 0)" class="form-control" id="form-telefono" value="{{post_telefono}}" required>
+                <small id="telefonoHelp" class="form-text text-muted">Asi te podemos contactar en caso que desees.</small>
+
+              </div>
+              <div class="form-group">
+                <label  for="form-fecha-nac">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" name="form-fecha-nac"  placeholder="Ej. 23/03/1980" value="{{post_fecha_nac}}"  >
+              </div>
+              <div class="form-group">
+                <label for="form-residencia">Lugar de residencia</label>
+                <select class="form-control" name="form-residencia">
+                  {% for option in ciudadList %}
+                  <option value="{{ option.ciud_id }}"{% if loop.first %} SELECTED{% endif %}>{{ option.ciud_nombre }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div align="center">
+                  <button type="submit" name="action" value="registrar" class="btn btn-primary">Registrarse</button>
+                  <button type="button" onclick="window.location.href='/login'" name="action" value="cancelar" class="btn btn-secondary">Cancelar</button>
+              </div>
+            </form>  
+          </div>
+          
+      </div><!--row-->
+    </div> <!--container-->
+ 
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+ 
+ <script type="text/javascript">
+  $(function() {
+    $('#form-fecha-nac').datepicker({dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-100:+0'});
+  });
+
+  
+jQuery(document).ready(function($){
+    
+    {% if post_residencia %}
+      $('select.form-residencia').find('option[value={{post_residencia}}]').attr('selected','selected');
+    {% endif %}
+    
+});
+
+
+  $.validate({
+         rules: {
+             'form-clave': { 
+               required: true,
+                  minlength: 6,
+                  maxlength: 10,
+
+             } , 
+
+                'form-clave2': { 
+                  equalTo: "#form-clave",
+                   minlength: 6,
+                   maxlength: 10
+             }
+
+
+         },
+   messages:{
+      'form-clave': { 
+               required:"Password Requerido",
+               minlength: "Minimo 6 caracteres",
+               maxlength: "Maximo 10 caracteres"
+             },
+      'form-clave2': { 
+       equalTo: "El password debe ser igual al anterior",
+       minlength: "Minimo 6 caracteres",
+       maxlength: "Maximo 10 caracteres"
+     }
+   }
+
+});
+
+  
+   function fnValidateMail()
+  {
+    //Creamos un objeto 
+    object=document.getElementById("form-email");
+    valueForm=object.value;
+    
+    // Patron para el correo
+    var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    if(valueForm.search(patron)==0)
+    {
+      //Mail correcto
+      object.style.color="#000";
+      return true;
+    }
+    //Mail incorrecto
+    object.style.color="#f00";
+    return false;
+
+  }
+  
+
+  function fnValidateForm()
+  {
+      if (!fnValidateMail()){
+        alert("El mail ingresado no es correcto");
+        return false;
+      }
+
+      
+      var nombre = document.getElementById("form-name").value;
+      if (nombre.length == 0){
+        alert("El nombre es obligatorio");
+      }
+
+      var username = document.getElementById("form-username").value;
+      if (username.length == 0){
+        alert("El usuario es obligatorio");
+        return false;
+      }
+      if (username.length > 8){
+        alert("El usuario debe ser de 8 caracteres");
+        return false;  
+      }
+
+      return true;
+
+  }
+ </script>
+
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends "layout.htm" %}
+{% block title %}Inscripción {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+
+      <div class="container">
+        <div class="row">
+       
+
+        <h1 style="margin: 0 0 20px 0">Inscripción a Curso Nahual</h1>
+
+         
+        <div class="col-md-12">
+
+          <form method="POST" action="/inscripcion2">
+
+              <div class="form-group">
+                <label for="form-dispositivo">¿Dispone de computadora o laptop para el curso?</label>
+               <select class="form-dispositivo" name="form-dispositivo">
+                    <option value="1">Si</option>
+                    <option value="0" selected>No</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                <label for="form-trabajo">¿Trabajas Actualmente?</label>
+               <select class="form-trabajo" name="form-trabajo">
+                  <option value="1">Si</option>
+                  <option value="0" selected>No</option>
+                </select>
+              </div>
+
+              
+              <div class="form-group">
+                <label for="form-trabajo-lugar">¿Donde trabaja actualmente?</label>
+                <input type="text" class="form-control" name="form-trabajo-lugar" value="{{post_trabajo_lugar}}" placeholder="Ingrese la empresa donde trabajo actualmente">
+              </div>
+
+
+              <div class="form-group">
+                <label for="form-sistemas-exp">¿Posee experiencia en sistemas?</label>
+               <select class="form-sistemas-exp" name="form-sistemas-exp">
+                    <option value="1">Si</option>
+                    <option value="0" selected>No</option>
+                  </select>
+                </div>
+
+            
+
+              <div class="form-group">
+                <label for="form-sistemas-lugar">¿Donde fue experiencia en sistemas?</label>
+                <input type="text" class="form-control" name="form-sistemas-lugar" value="{{post_sistemas_lugar}}" placeholder="Ingrese donde trabajó anteriormente">
+              </div>
+
+              <div class="form-group">
+                <label for="form-sistemas">¿Trabajas actualmente en sistemas?</label>
+                <select class="form-sistemas" name="form-sistemas">
+                  <option value="1">Si</option>
+                  <option value="0" selected>No</option>
+                </select>
+              </div>
+
+
+              <div class="form-group">
+                <label for="form-nivel" >¿Cual es su nivel de educación?</label>
+               <select class="form-nivel-educacion" name="form-nivel-educacion">
+                  {% for option in nivelList %}
+                  <option value="{{ option.nive_id }}"{% if loop.first %} SELECTED{% endif %}>{{ option.nive_nombre }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="form-estudia">¿Estudia Actualmente?</label>
+                <select class="form-estudia"name="form-estudia">
+                      <option value="1">Si</option>
+                      <option value="0" selected>No</option>
+                    </select>
+              </div>
+
+              <div class="form-group">
+                <label for="form-nahual">¿Donde se enteró de Nahual?</label>
+                <select class="form-nahual" name="form-nahual">
+                    <option value="0" selected></option>
+                    <option value="1">Facebook</option>
+                    <option value="2">Amigo</option>
+                    <option value="3">Otro</option>
+                </select>
+            </div>
+            <div>
+                <!-- formulario 1-->
+                <input type="hidden" name="form-dni" value="{{post_dni}}">
+                <input type="hidden" name="form-nombre" value="{{post_nombre}}">
+                <input type="hidden" name="form-apellido" value="{{post_apellido}}">
+                <input type="hidden" name="form-email" value="{{post_email}}">
+                <input type="hidden" name="form-fecha-nac" value="{{post_fecha_nac}}">
+                <input type="hidden" name="form-nacionalidad" value="{{post_nacionalidad}}">
+                <input type="hidden" name="form-telefono" value="{{post_telefono}}">
+                <input type="hidden" name="form-residencia" value="{{post_residencia}}">
+                <input type="hidden" name="form-nodo" value="{{post_nodo}}">
+                <!-- formulario 3-->
+                <input type="hidden" name="form-motivacion" value="{{post_motivacion}}">
+                <input type="hidden" name="form-intervencion" value="{{post_intervencion}}">
+                <input type="hidden" name="form-afectacion" value="{{post_afectacion}}">
+
+              </div>
+              <div align="center">
+                <button type="submit" name="action" value="inscripcion1" class="btn btn-success">Anterior</button>
+                <button type="submit" name="action" value="inscripcion3" class="btn btn-success">Siguiente</button>
+              </div>
+              </form>
+            </div>
+          </div><!--row-->
+        </div> <!--container-->
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+
+<script type="text/javascript">
+       jQuery(document).ready(function($){
+           {% if post_dispositivo %}
+              $('select.form-dispositivo').find('option[value={{post_dispositivo}}]').attr('selected','selected');
+           {% endif %}     
+           {% if post_sistemas_exp %}
+              $('select.form-sistemas-exp').find('option[value={{post_sistemas_exp}}]').attr('selected','selected');
+           {% endif %}     
+           {% if post_sistemas %}
+              $('select.form-sistemas').find('option[value={{post_sistemas}}]').attr('selected','selected');
+           {% endif %}     
+           {% if post_nivel_educacion %}
+              $('select.form-nivel-educacion').find('option[value={{post_nivel_educacion}}]').attr('selected','selected');
+           {% endif %}     
+           {% if post_estudia %}
+              $('select.form-estudia').find('option[value={{post_estudia}}]').attr('selected','selected');
+           {% endif %}     
+           {% if post_nahual %}
+             $('select.form-nahual').find('option[value={{post_nahual}}]').attr('selected','selected');      
+           {% endif %}     
+});
+</script>         
+{% endblock %}

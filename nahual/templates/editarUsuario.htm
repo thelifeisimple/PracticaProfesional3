@@ -1,0 +1,160 @@
+{% extends "layout.htm" %}
+{% block title %}Cursos {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+  <div class="container">
+    <div class="row">
+ 
+          
+
+          <h1 id = "titulo1" class="text-center"> Editar Usuario</h1>
+
+          <br>
+
+          <div class="well configurator">
+              
+            <div id="result"></div>
+            <div id="errorMsg"></div>
+              <br>
+
+                {% if error%}
+                <br>
+                <font size="3" color="red"><h4 id="error">{{error}}</h4></font>
+                {% endif %}
+                <br>
+            </div>
+            
+            <!-- <div class="col-sm-8 col-sm-offset-2 form-box">  -->
+              <div class="col-md-12">
+
+                <form name="formUsuario" role="form" action="" method="post" class="form-control" onsubmit="return fnValidateForm()">
+
+                  <div class="form-group">
+                    <label  for="form-email">Email</label>
+                    <input type="email" name="form-email" placeholder="Ingrese su email" class="form-email form-control" id="form-email" value="{{usuario.usua_email}}" disabled>
+                    <small id="emailHelp" class="form-text text-muted">Nunca lo compartiremos con nadie mas que tu.</small>
+                  </div>
+                  <!--<div class="form-group">
+                    <label  for="form-usuario">Usuario</label>
+                    <input type="text" name="form-usuario" placeholder="ingrese usuario de 8 caracateres" class="form-usuario form-control" id="form-usuario" value="{{usuario.usua_codigo}}"  disabled>
+                  </div>
+                  -->
+                   <div class="form-group">
+                    <label  for="form-clave">Clave</label>
+                    <input type="password" name="form-clave" placeholder="Ingrese una clave mayor a 6 caracteres" class="form-password form-control" id="form-clave" value="" >
+                  </div>
+                   <div class="form-group">
+                    <label  for="form-clave2">Confirmar Clave</label>
+                    <input type="password" name="form-clave2" placeholder="Repita la clave ingresada" class="form-password2 form-control" id="form-clave2"   >
+                  </div>
+                   <div class="form-group">
+                    <label  for="form-nombre">Nombre</label>
+                    <input type="nombre" name="form-nombre" placeholder="Ingrese su nombre" class="form-nombre form-control" id="form-nombre" value="{{usuario.usua_nombre}}" >
+                  </div>
+                   <div class="form-group">
+                    <label  for="form-apellido">Apellido</label>
+                    <input type="apellido" name="form-apellido" placeholder="Ingrese su apellido..." class="form-apellido form-control" id="form-apellido" value="{{usuario.usua_apellido}}" >
+                  </div>
+                   <div class="form-group">
+                    <label  for="form-telefono">Celular</label>
+                    <input type="telefono" name="form-telefono" placeholder="Ej. 1164313243  (sin el 0)" class="form-telefono form-control" id="form-telefono" value="{{usuario.usua_telefono}}" >
+                    <small id="telefonoHelp" class="form-text text-muted">Asi te podemos contactar en caso que desees.</small>
+                  </div>
+                   <div class="form-group">
+                    <label  for="form-fecha-nac">Fecha de Nacimiento</label>
+                    <input type="date" class="form-birthdate form-control" name="form-fecha-nac"  placeholder="Ej. 23/03/1980" value="{{usuario.usua_fecha_nacimiento}}" >
+                  </div>
+                  <div class="form-group">
+                    <label for="form-residencia">Lugar de residencia</label>
+                    <select class="form-residencia" id="form-residencia" name="form-residencia">
+                      {% for option in ciudadList %}
+                        <option value="{{ option.ciud_id }}">{{ option.ciud_nombre }}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                  <div align="center">
+                      <button type="submit" name="action" value="registrar" class="btn btn-primary">Guardar</button>
+                      <button type="button" onclick="window.location.href="{{url_for('administracion')}}"" name="action" value="cancelar" class="btn btn-secondary">Cancelar</button>
+                  </div>
+               
+                </form>
+              </div>
+          
+      </div><!--row-->
+    </div> <!--container-->
+
+    
+  <!-- Bootstrap Date-Picker Plugin -->
+  <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+   <script type="text/javascript">
+    $(function() {
+    $('#form-fecha-nac').datepicker({dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-100:+0'});
+  });
+  
+   jQuery(document).ready(function($){
+    {% if usuario %}
+      $('select.form-residencia').find('option[value={{usuario.usua_residencia_ciud_id}}]').attr('selected','selected');
+    {% endif %}
+});
+
+     function fnValidateMail()
+    {
+      //Creamos un objeto 
+      object=document.getElementById("form-email");
+      valueForm=object.value;
+      
+      // Patron para el correo
+      var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+      if(valueForm.search(patron)==0)
+      {
+        //Mail correcto
+        object.style.color="#000";
+        return true;
+      }
+      //Mail incorrecto
+      object.style.color="#f00";
+      return false;
+
+    }
+    
+
+    function fnValidateForm()
+    {
+        if (!fnValidateMail()){
+          alert("El mail ingresado no es correcto");
+          return false;
+        }
+
+        
+        var nombre = document.getElementById("form-nombre").value;
+        if (nombre.length == 0){
+          alert("El nombre es obligatorio");
+        }
+
+        var username = document.getElementById("form-usuario").value;
+        if (username.length == 0){
+          alert("El usuario es obligatorio");
+          return false;
+        }
+        if (username.length >= 5){
+          alert("El usuario debe ser de al menos 5 caracteres");
+          return false;  
+        }
+
+        return true;
+
+    }
+   </script>
+{% endblock %}

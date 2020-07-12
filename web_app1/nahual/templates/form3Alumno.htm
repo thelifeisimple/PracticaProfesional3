@@ -1,0 +1,88 @@
+{% extends "layout.htm" %}
+{% block title %}Inscripción {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+
+      <div class="container">
+        <div class="row">
+      
+        <h1 style="margin: 0 0 20px 0">Inscripción a Curso Nahual</h1>
+
+        <div class="well configurator">
+           
+          <form method="post" action="inscripcion3" name="form">
+    
+            <div class="col-md-12">
+
+              <div class="form-group" id="form-motivacion">
+                <label for="form-motivacion">¿Cuales son sus Expectativas y/o Motivaciones?</label>
+                <textarea rows="4" cols="80" name="form-motivacion">{{post_motivacion}}</textarea>
+
+              </div>
+
+              <div class="form-group" valign="center">
+                <label for="form-nahual">¿Como intervendrias en Nahual?</label>
+                <textarea rows="4" cols="80" name="form-intervencion">{{post_intervencion}}</textarea>
+
+              </div>
+              
+              <div class="form-group">
+                <label for="form-afectacion">¿Como te afectaría la intervención de Nahual?</label>
+                <textarea rows="4" cols="80" name="form-afectacion">{{post_afectacion}}</textarea>
+              </div>
+              
+              <!-- formulario 1-->
+              <div>
+                <input type="hidden" name="form-dni" value="{{post_dni}}">
+                <input type="hidden" name="form-nombre" value="{{post_nombre}}">
+                <input type="hidden" name="form-apellido" value="{{post_apellido}}">
+                <input type="hidden" name="form-email" value="{{post_email}}">
+                <input type="hidden" name="form-fecha-nac" value="{{post_fecha_nac}}">
+                <input type="hidden" name="form-nacionalidad" value="{{post_nacionalidad}}">
+                <input type="hidden" name="form-telefono" value="{{post_telefono}}">
+                <input type="hidden" name="form-residencia" value="{{post_residencia}}">
+                <input type="hidden" name="form-nodo" value="{{post_nodo}}">
+              </div>  
+              <!-- formulario 2-->
+              <div>
+                <input type="hidden" name="form-dispositivo" value="{{post_dispositivo}}">
+                <input type="hidden" name="form-trabajo" value="{{post_trabajo}}">
+                <input type="hidden" name="form-trabajo-lugar" value="{{post_trabajo_lugar}}">           
+                <input type="hidden" name="form-sistemas-exp" value="{{post_sistemas_exp}}">
+                <input type="hidden" name="form-sistemas-lugar" value="{{post_sistemas_lugar}}">
+                <input type="hidden" name="form-sistemas" value="{{post_sistemas}}">
+                <input type="hidden" name="form-nivel-educacion" value="{{post_nivel_educacion}}">
+                <input type="hidden" name="form-nahual" value="{{post_nahual}}">
+                <input type="hidden" name="form-estudia" value="{{post_estudia}}">
+              </div>
+              <div align="center">
+                <button type="submit" name="action" value="inscripcion2" class="btn btn-success">Anterior</button>
+                <button type="submit" name="action" value="finInscripcion" onclick="fnConfirmar()" class="btn btn-primary">Finalizar inscripción</button>
+              </div>
+              </form>
+            </div>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+
+  <script type="text/javascript">
+        function fnConfirmar(form){
+  
+          var acepta = confirm("¿Confirma su inscripción?")
+          if (acepta) {
+            form.submit();
+             return true; 
+            } else {
+                return false;
+            } 
+          }
+    
+  </script>       
+
+{% endblock %}

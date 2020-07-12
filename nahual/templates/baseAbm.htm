@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Administradoción Inscripciones</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet"/>
+    <link href="../static/css/login.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet"/>	
+ 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+ <script type="text/javascript">
+     jQuery(document).ready(function($){
+      {% if nodoSelect %}
+         $('select.form-nodo').find('option[value={{nodoSelect}}]').attr('selected','selected');
+      {% endif %}
+      {% if ciudadSelect %}
+         $('select.form-ciudad').find('option[value={{ciudadSelect}}]').attr('selected','selected');
+      {% endif %}
+
+        });
+
+function fnLimpiarFiltros(){
+        document.getElementById("form-nodo").selectedIndex = 0;
+        //document.getElementById("form-descripcion").selectedIndex = 0;
+        document.getElementById("form-ciudad").selectedIndex = 0;
+
+  
+}
+</script> 
+
+</head>
+<body>  
+    {% block title %}  {% endblock %}
+    {% block content %}
+    <button type="submit" class="btn btn-success">Buscar</button>
+    <button type="button" name="action" value="limpiar" onclick="fnLimpiarFiltros()" class="btn btn-success">Limpiar</button>
+    <button type="submit" class="btn btn-primary">Agregar</button>
+    {% endblock %}
+</body>
+</html>

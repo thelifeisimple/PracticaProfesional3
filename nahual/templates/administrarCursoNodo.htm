@@ -1,0 +1,240 @@
+{% extends "layout.htm" %}
+{% block title %}Alumnos por Curso {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+
+    <div class="container">
+      <div class="row">
+       
+            <h1 style="margin: 0 0 20px 0"> Administración de Cursos y Nodos</h1>
+
+         
+
+                <div class="col-md-12">
+                  <form role="form" action="" method="post" class="form-control">
+
+                  <table id="filtros_table" class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                              <label for="form-curso">Curso</label>
+                              <select class="form-control" id="form-curso" name="form-curso">
+                                <option value="0" selected>Todos</option>
+                              {% for option in cursoList %}
+                               <option value="{{ option.curs_id }}">{{ option.curs_nombre }}</option>
+                               {% endfor %}
+                             </select>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                                <label for="form-nodo">Nodo</label>
+                                <select class="form-control" id="form-nodo" name="form-nodo">
+                                  <option value="0" selected>Todos</option>
+                                {% for option in nodoList %}
+                                 <option value="{{ option.nodo_id }}">{{ option.nodo_nombre }}</option>
+                                 {% endfor %}
+                               </select>
+                              </div>
+                            </td>
+                          <td>
+                            <div class="form-group">
+                                <label for="form-profesor">Profesor</label>
+                                <select class="form-control" id="form-profesor" name="form-profesor">
+                                  <option value="0" selected>Todos</option>
+                                {% for option in profesorList %}
+                                  <option value="{{ option.prof_id }}">{{ option.prof_apellido +' '+ option.prof_nombre }}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </td>
+                          <td>
+                            <div class="form-group">
+                                <label for="form-anio">Anio</label>
+                                <select class="form-control" id="form-anio" name="form-anio">
+                                  <option value="0" selected>Todos</option>
+                                  <option value="2018" >2018</option>
+                                  <option value="2019" >2019</option>
+                                  <option value="2020" >2020</option>
+                                  <option value="2021" >2021</option>                                 
+                               </select>
+                              </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                                <label for="form-cuatrimestre">Cuatrimestre</label>
+                                <select class="form-control" id="form-cuatrimestre" name="form-cuatrimestre">
+                                  <option value="0" selected>Todos</option>
+                                  <option value="1" >Primero</option>
+                                  <option value="2" >Segundo</option>
+                               </select>
+                              </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <label for="form-estado">Estado</label>
+                                <select id="form-estado" class="form-control" name="form-estado"  >
+                                  <option value="Todos" >Todos</option>
+                                  <option value="Activo" SELECTED>Activo</option>
+                                  <option value="Inactivo">Inactivo</option>
+                                </select>                          
+                            </div>
+                      </tr>
+                      <tr>
+                          <td colspan="4"> </td>
+                          <td>
+                            <div class="form-group">
+                              <button type="submit" name="action" value="buscar" class="btn btn-success">Buscar</button>
+                              <button type="button" name="action" value="limpiar" onclick="fnLimpiarFiltros()" class="btn btn-success">Limpiar</button>
+                              <button type="button" onclick="fnDetalleCursoNodo('agregar','0')" name="action" value="agregar" class="btn btn-primary">Agregar</button>
+                            </div>
+                          </td>
+                      </tr>
+                </thead>
+                </table>
+              </form>
+
+              </div>
+
+              
+              {% block content %}
+                {% if listaBusqueda %}
+
+              <div class="col-md-12">
+
+     
+                <div class="row alumno align-items-center">
+
+                  <div id="alumnos">
+                    <table id="nodoTable" class="table table-bordered table-light">
+                      {% for fila in listaBusqueda  %}
+                        {% if loop.index == 1 %} 
+                          <thead class="thead-light">
+                              <tr>
+                                  <th colspan=3></th>                             
+                                  <th>Curso</th>
+                                  <th>Nodo</th>
+                                  <th>Anio</th>
+                                  <th>Cuatrimestre</th>
+                                  <th>Profesor</th>
+                                  <th>Estado</th>
+                              </tr>
+                          </thead>
+                        {% endif %}
+                        <tbody>
+                            <tr><!--/{{fila.nodo_id}}-->
+                                <td><a onclick="fnDetalleCursoNodo('detalle', {{fila.cuno_id}})" placeholder="Detalle"><img src="../static/img/grid-detalle.png"></a></td>
+                                <td><a onclick="fnDetalleCursoNodo('editar', {{fila.cuno_id}})" placeholder="Modificar"><img src="../static/img/grid-editar.png"></a></td>
+                                {% if fila.cuno_estado == 'Inactivo'%}
+                                  <td colspan=1></td>
+                                {%else%}
+                                <td><a onclick="fnDetalleCursoNodo('eliminar', {{fila.cuno_id}})" placeholder="Eliminar"><img src="../static/img/grid-eliminar.png"></a></td> 
+                                <!--<td><button type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  placeholder="Eliminar"><img src="../static/img/grid-eliminar.png"></button></td>-->
+                                {%endif%}  
+                                <td>{{ fila.curs_nombre }}</td>
+                                <td>{{ fila.nodo_nombre }}</td>
+                                <td>{{ fila.cuno_anio }}</td>
+                                <td>{% if fila.cuno_cuatrimestre == 1 %} Primero {%else%} Segundo {%endif%} </td>
+                                <td>{{ fila.prof_apellido + ' '+ fila.prof_nombre }}</td>
+                                <td>{{ fila.cuno_estado }}</td>
+
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                  </div> <!--nodos-->
+                </div> <!--row nodos-->
+     
+            </div> <!-- row-->
+            {% endif %}
+            {% endblock %}
+      
+            
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js" ></script>
+<script type="text/javascript">
+
+ 
+       jQuery(document).ready(function($){
+        {% if anioSelect %}
+           $(document.querySelector("#form-anio")).find('option[value={{anioSelect}}]').attr('selected','selected');
+        {% endif %}
+        {% if cuatrimestreSelect %}
+           $(document.querySelector("#form-cuatrimestre")).find('option[value={{cuatrimestreSelect}}]').attr('selected','selected');
+        {% endif %}
+        {% if estadoSelect %}
+           $(document.querySelector("#form-estado")).find('option[value={{estadoSelect}}]').attr('selected','selected');
+        {% endif %}
+        {% if cursoSelect %}
+          $(document.querySelector("#form-curso")).find('option[value={{cursoSelect}}]').attr('selected','selected');
+        {% endif %}
+        {% if nodoSelect %}
+           $(document.querySelector("#form-nodo")).find('option[value={{nodoSelect}}]').attr('selected','selected');
+        {% endif %}
+        {% if profesorSelect %}
+           $(document.querySelector("#form-profesor")).find('option[value={{profesorSelect}}]').attr('selected','selected');
+        {% endif %}
+
+          });
+  
+  function fnLimpiarFiltros(){
+          document.getElementById("form-anio").selectedIndex = 0;
+          document.getElementById("form-estado").selectedIndex = "Todos";
+          document.getElementById("form-cuatrimestre").selectedIndex = 0;
+          document.getElementById("form-curso").selectedIndex = 0;
+          document.getElementById("form-nodo").selectedIndex = 0;
+          document.getElementById("form-profesor").selectedIndex = 0;
+  
+          return true;
+
+        }
+
+  
+  
+  function fnDetalleCursoNodo(destino, id) {
+        var w = 600;
+        var h = 600;
+        var left = Number((screen.width/2)-(w/2));
+        var tops = Number((screen.height/2)-(h/2));
+
+        if (destino == "detalle"){
+          window.open("/detalleCursoNodo?id="+id, 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+        } 
+        if (destino == "editar"){
+          window.open("/editarCursoNodo?id="+id, 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+        } 
+        if (destino == "agregar"){
+           window.open("/agregarCursoNodo", 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+        }
+        if (destino == "eliminar"){
+            // if (confirm("¿Confirma la operacion?")){
+            //   window.open("/eliminarCursoNodo?id="+id, 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+            // }
+            $('#confirmModal').find('#btCancelar')
+              .off('click').on('click', () => console.log('cancelar', id) );
+
+            $('#confirmModal').find('#btAceptar')
+                            .off('click').on('click', () =>  window.open("/eliminarCursoNodo?id="+id, 'Detalle', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left) );//console.log('aceptar', id) );
+            
+            $("#modalTitle").html('Desactivar Curso para ese Nodo');
+
+            $('#confirmModal').modal("show"); 
+        }
+      
+          
+        return false;
+        
+}
+  </script>       
+
+
+{% endblock %}

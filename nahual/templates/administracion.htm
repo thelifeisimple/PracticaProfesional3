@@ -1,0 +1,73 @@
+{% extends "layout.htm" %}
+{% block title %}Administración{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+
+    <div class="container">
+      <div class="row">
+
+
+        <h1 > Administración del Sistema Nahual</h1>
+        <form method="post" action="">
+
+          <div  class="col-lg-12 col-lg-6 col-sm-3">
+
+          <p>Hola {{username}}</p> 
+    
+          <button type="submit" name="action" value="salir" class="btn btn-outline-danger">Cerrar Sesion</button>
+  
+          <button type="submit" name="action" value="editar" class="btn btn-secondary">Editar Usuario</button>
+
+          <button type="submit" name="action" value="inscripcion" class="btn btn-primary">Inscribir Alumno</button>
+
+
+             <p> Administración del Sistemas </p>
+            <div class="row">
+              
+                  <div class="col-lg-4 col-md-4">
+                          <button type="submit" name="action" value="nodos" class="btn btn-success">Nodos</button>
+
+                  </div>
+
+                  <div class="col-md-4">
+                              <button type="submit" name="action" value="profesores" class="btn btn-success">Profesores</button>
+                  </div>
+
+                  <div class="col-md-4">
+                      <button type="submit" name="action" value="cursos" class="btn btn-success">Cursos</button>
+                  </div>
+
+
+            </div>
+          
+
+                 <p> Administración de Cursos </p>
+              <div class="row">
+                  
+                      <div class="col-md-4">
+                              <button type="submit" name="action" value="alumnos" class="btn btn-success">Alumnos</button>
+                      </div>                 
+
+
+
+                      <div class="col-md-4">
+                        <button type="submit" name="action" value="cursoNodo" class="btn btn-success">Cursos x Nodos</button>
+                      </div>
+
+                      <div class="col-md-4">
+                        <button type="submit" name="action" value="cursoAlumno" class="btn btn-success">Cursos x Alumnos</button>
+                      </div>
+              </div>
+
+           
+        </div>
+        </form>
+      </div><!--row-->
+    </div> <!--container-->
+ {% endblock %}

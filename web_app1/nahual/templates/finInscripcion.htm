@@ -1,0 +1,29 @@
+{% extends "layout.htm" %}
+{% block title %}Alumnos {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+      <div class="row">
+      
+        
+
+         <div class="col-md-12">
+                <h3 class="text-light bg-dark"> ¡GRACIAS POR TU INSCRIPCIÓN! </h3> 
+                <h5>NOS ESTAREMOS CONTACTANDO VÍA MAIL CON VOS. </h5>
+        </div>
+        <div class="col-md-12" align="center">
+
+        <form method="post" action="">   
+            <button type="submit" name="action" value="inscripcion" class="btn btn-success">Continuar</button>
+        </form>
+    </div>
+</div>
+
+</div>    
+{% endblock %}

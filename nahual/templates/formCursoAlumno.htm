@@ -1,0 +1,226 @@
+{% extends "layoutDetalle.htm" %}
+{% block title %}Cursos/Alumnos {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+          
+        <h1 style="margin: 0 0 10px 0">Detalle Curso/Alumno</h1>
+        <br>
+    
+         
+        <form role="form" action="" method="post" class="form-control" onsubmit="return fnValidateForm()">
+
+ 
+          <div  class="col-md-12">
+          
+                      {% if actionSelect != "agregar"  %} 
+                      <div class="form-group">
+                        <label for="form-id-show">ID</label>
+                        <input type="text" name="form-id-show" class="form-control" id="form-id-show" value="{%if cursoAlumnoSelect %} {{cursoAlumnoSelect.Curso_Alumno.cual_id}} {%endif%}"  disabled>
+                        <input type="hidden" name="form-id" class="form-control" id="form-id" value="{%if cursoAlumnoSelect %} {{cursoAlumnoSelect.Curso_Alumno.cual_id}} {%endif%}" >
+                      </div>
+                      {%endif%}
+                      
+
+                      {%if actionSelect == "agregar" %}  
+                        <div class="form-group">
+                          <label for="form-cuno">Curso y Nodo</label>                     
+                            <div class="form-group">
+                                  <select class="form-control" id="form-cuno" name="form-cuno"    >
+                                    {% for option in cursoNodoList %}
+                                    <option value="{{ option.Curso_Nodo.cuno_id }}"{% if loop.first %} SELECTED{% endif %}>{{   option.Curso.curs_nombre  + '@  ' + option.Nodo.nodo_nombre + ' ( Año: ' +option.Curso_Nodo.cuno_anio|string + ' '+  option.Curso_Nodo.cuno_cuatrimestre|string+'° Cuatrimestre ) '}}</option>
+                                    {% endfor %}
+                                  </select>
+                        </div>
+
+                      {%else%}
+                        <input type="hidden" name="form-cuno" class="form-control" id="form-cuno" value="{%if cursoAlumnoSelect %} {{cursoAlumnoSelect.Curso_Nodo.cuno_id}} {%endif%}" >
+                        <div class="form-group">
+                          <label for="form-curso">Curso</label>                     
+                            <div class="form-group">
+                                  <select class="form-control" id="form-curso" name="form-curso"  disabled >
+                                    {% for option in cursoList %}
+                                    <option value="{{ option.curs_id }}"{% if loop.first %} SELECTED{% endif %}>{{ option.curs_nombre }}</option>
+                                    {% endfor %}
+                                  </select>
+                        </div>
+                    
+                        <div class="form-group">
+                          <label for="form-nodo">Nodo</label>                     
+                          <select class="form-control" id="form-nodo" name="form-nodo"   disabled >
+                            {% for option in nodoList %}
+                            <option value="{{ option.nodo_id }}"{% if loop.first %} SELECTED{% endif %}>{{ option.nodo_nombre }}</option>
+                            {% endfor %}
+                          </select>
+                      </div>
+
+                      {%endif%}
+
+                      
+                      <div class="form-group">
+                        <label for="form-alumno">Alumno</label>                     
+                        <select class="form-control" id="form-alumno" name="form-alumno" {% if actionSelect == 'detalle' %} disabled {% endif %}>
+                          {% for option in alumnoList %}
+                          <option value="{{ option.alum_id }}"{% if loop.first %} SELECTED{% endif %}>{{ option.alum_apellido +' '+ option.alum_nombre + ' ('+ option.alum_dni+')'}}</option>
+                          {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                      {% if actionSelect !="editar"  %}
+                        <label for="form-estado-show">Estado</label>
+                        <input type="text" name="form-estado-show" class="form-control" id="form-estado-show" value="Activo"  disabled>
+                        <input type="hidden" name="form-estado" class="form-control" id="form-estado" value="Activo">
+                      {%else%}      
+                          <label for="form-estado">Estado</label>
+                          <select class="form-control" id="form-estado" name="form-estado"  {% if actionSelect =="detalle"  %} disabled {%else%} required {%endif%}>
+                            <option value="Activo" SELECTED>Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                          </select>                          
+                        {%endif%}
+                    </div>
+
+                    {% if actionSelect !="agregar"  %}
+                      <div class="container">
+                        <div class="col-md-10">
+                          <h5>Datos de la Materia</h5>
+
+                            <div class="form-group">
+                                <label for="form-nota">Nota Final</label>
+                                <td><input type="text" class="form-control" name="form-nota" value="{%if cursoAlumnoSelect.Curso_Alumno.cual_nota_final %} {{cursoAlumnoSelect.Curso_Alumno.cual_nota_final}}  {%endif%}" {% if actionSelect =="detalle"  %} disabled {%endif%}></td>
+                            </div>
+
+
+                            <div class="form-group">
+                              <label for="form-fecha-firma">Fecha de Firma</label>
+                              <td><input type="date" class="form-control" name="form-fecha-firma" value="{%if cursoAlumnoSelect.Curso_Alumno.cual_fecha_firma  %} {{cursoAlumnoSelect.Curso_Alumno.cual_fecha_firma}}  {%endif%}"  {% if actionSelect =="detalle"  %} disabled {%endif%}></td>
+                          </div>
+
+                          <div class="form-group">
+                                <label for="form-profesor">Profesor</label>                     
+                                <select class="form-control" id="form-profesor" name="form-profesor" {% if actionSelect == 'detalle' %} disabled {% endif %}>
+                                  <option value="0" SELECTED>Profesor que le firmó la nota</option>
+                                  {% for option in profesorList %}
+                                  <option value="{{ option.prof_id }}"  >{{  option.prof_apellido +' '+ option.prof_nombre + ' (' + option.prof_dni + ')' }}</option>
+                                  {% endfor %}
+                                </select>
+                          </div>
+                        </div>
+                      </div>
+                   
+                  {%endif%}
+
+                     
+
+
+ 
+                      {% if actionSelect !="agregar"  %}
+
+                        <div class="form-group">
+                          <br>
+                          <label for="form-fecha-alta">Datos del Sistema</label>
+                          <div>
+                            <table class="table table-sm">
+                              <tr>
+                                <td><input type="text" class="form-control" name="form-fecha_alta" value="Fecha de Alta: {%if cursoAlumnoSelect %} {{cursoAlumnoSelect.Curso_Alumno.cual_fecha_alta}}  {%endif%}" disabled></td>
+                                <td><input type="text" class="form-control" name="form-estado" value="Estado: {%if cursoAlumnoSelect %} {{cursoAlumnoSelect.Curso_Alumno.cual_estado}}  {%endif%}" disabled></td>
+                              </tr>
+                              <!-- <tr>
+                                <td><input type="text" class="form-control" name="form-fecha-modif" value="Fecha de Modificación: {%if cursoAlumnoSelect %} {{cursoAlumnoSelect.cual_fecha_modif}}  {%endif%}"  disabled></td>
+                                <td><input type="text" class="form-control" name="form-usuario_modif" value="Usuario de Modificación: {%if cursoAlumnoSelect %} {{cursoAlumnoSelect.cual_usuario_modif}}  {%endif%}" disabled></td>
+                              </tr>         -->
+                              </table>
+                            </div>
+                          </div>
+                      {%endif%}
+
+                       <!--Hacer funcion para renderizar template y almacenar la info del form-->  
+                      <div class="form-group" align="center">
+                        {%if actionSelect == "detalle" %}    
+                          <button type="button" onclick="window.close()" name="action" value="cancelar" class="btn btn-primary">Cerrar</button>
+                        {%else%}
+                          <button type="button" onclick="if (confirm('No se guardaran las modificaciones')) window.close();" name="action" value="cancelar" class="btn btn-primary">Cerrar</button>
+                          <button type="submit" name="action" value="guardar" onclick="fnConfirmar()" class="btn btn-success">Guardar</button>
+                        {%endif%}
+                        </div>
+                        <br>
+
+                    <div id="result"></div>
+                        
+                    <div id="errorMsg"></div>
+            
+                      {% if error%}
+                      <br>
+            
+                      <font size="3" color="red"><h4 id="error">{{error}}</h4></font>
+                      {% endif %}
+                      <br>
+                      <br>
+                  
+        </form>
+
+      </div><!--row-->
+    </div> <!--container-->
+ 
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js" ></script>
+
+<script type="text/javascript">
+ 
+
+jQuery(document).ready(function($){
+  {% if cursoAlumnoSelect %}
+     	  
+    $(document.querySelector("#form-alumno")).find('option[value={{cursoAlumnoSelect.Curso_Alumno.cual_alum_id}}]').attr('selected','selected');
+    $(document.querySelector("#form-estado")).find('option[value={{cursoAlumnoSelect.Curso_Alumno.cual_estado}}]').attr('selected','selected');
+    $(document.querySelector("#form-curso")).find('option[value={{cursoAlumnoSelect.Curso_Nodo.cuno_curs_id}}]').attr('selected','selected');
+    $(document.querySelector("#form-nodo")).find('option[value={{cursoAlumnoSelect.Curso_Nodo.cuno_nodo_id}}]').attr('selected','selected');
+    $(document.querySelector("#form-profesor")).find('option[value={{cursoAlumnoSelect.Curso_Alumno.cual_prof_id}}]').attr('selected','selected');
+
+    {% if (actionSelect == "editar")  %} 
+      document.getElementById("form-curso").disabled=true;
+    {% endif %}
+    {% if (actionSelect == "agregar")  %} 
+      document.getElementById("form-estado").disabled=true;
+    {% endif %}
+  
+  {% endif %}
+
+});
+
+function fnValidateForm()
+{
+    
+    var nombre = document.getElementById("form-nombre").value;
+    if (nombre.length == 0){
+      alert("El nombre es obligatorio");
+    }
+
+  
+    return true;
+
+}
+
+  function fnConfirmar(form){
+
+    var acepta = confirm("¿Confirma las modificaciones?")
+    if (acepta) {
+      form.submit();
+       return true; 
+      } else {
+          return false;
+      } 
+    
+  }
+
+</script>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends "layout.htm" %}
+{% block title %}Inscripción {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+      <div class="container">
+        <div class="row">
+           
+
+            <h1 style="margin: 0 0 20px 0">Inscripción a Curso Nahual</h1>
+            <br>
+        
+            
+            
+            <div class="col-md-12">
+              <form method="POST" action="inscripcion1">
+    
+              <div class="form-group">
+                <label for="form-dni">Dni</label>
+                <input type="number" class="form-control" name="form-dni" value="{{post_dni}}" placeholder="Ingrese su DNI" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-nombre">Nombre</label>
+                <input type="text" class="form-control" name="form-nombre" value="{{post_nombre}}" placeholder="Ingrese su Nombre" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-apellido">Apellido</label>
+                <input type="text" class="form-control" name="form-apellido" value="{{post_apellido}}" placeholder="Ingrese su Apellido" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-email">Email</label>
+                <input type="email" class="form-control" name="form-email" value="{{post_email}}" placeholder="Ingrese su Email" required>
+              </div>
+
+
+              <div class="form-group">
+                <label for="form-fecha-nac">Fecha de nacimiento</label>
+                <input type="date" class="form-birthdate form-control" name="form-fecha-nac" value="{{post_fecha_nac}}" placeholder="Ingrese la fecha de nacimiento dd/mm/yyyy" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-nacionalidad" >Nacionalidad</label>
+                      <select class="form-nacionalidad" name="form-nacionalidad">
+                      {% for option in paisList %}
+                      <option value="{{ option.pais_id }}"{% if loop.first %} SELECTED{% endif %}>{{ option.pais_nacionalidad }}</option>
+                      {% endfor %}
+                    </select>
+              </div>
+
+              <div class="form-group">
+                <label for="form-telefono">Telefono</label>
+                <input type="number" class="form-control" name="form-telefono" value="{{post_telefono}}" placeholder="Ingrese su telefono" required>
+              </div>
+
+              <div class="form-group">
+                  <label for="form-residencia">Lugar de residencia</label>
+                  <select class="form-residencia" name="form-residencia">
+                      {% for option in ciudadList %}
+                      <option value="{{ option.ciud_id }}"{% if loop.first %} SELECTED{% endif %}>{{ option.ciud_nombre }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                <div class="form-group">
+                    <label for="form-otro">¿Cual Otro lugar de residencia?</label>
+                    <input type="text" class="form-control" name="form-otro" value="{{post_otro}}" placeholder="Ingrese otro lugar de residencia" >
+                  </div>
+                
+                  <div class="form-group">
+                      <label for="form-nodo">Nodo</label>
+                      <select class="form-nodo" name="form-nodo">
+                        {% for option in nodoList %}
+                        <option value="{{ option.nodo_id }}"{% if loop.first %} SELECTED{% endif %}>{{ option.nodo_nombre }}</option>
+                        {% endfor %}
+                      </select>
+
+                    </div>
+
+
+
+
+
+                <!-- formulario 2-->
+                <input type="hidden" name="form-dispositivo" value="{{post_dispositivo}}">
+                <input type="hidden" name="form-sistemas" value="{{post_sistemas}}">
+                <input type="hidden" name="form-sistemas-exp" value="{{post_sistemas_exp}}">
+                <input type="hidden" name="form-sistemas-lugar" value="{{post_sistemas_lugar}}">
+                <input type="hidden" name="form-trabajo" value="{{post_trabajo}}">
+                <input type="hidden" name="form-trabajo-lugar" value="{{post_trabajo_lugar}}">
+                <!-- formulario 3-->
+                <input type="hidden" name="form-nivel-educacion" value="{{post_nivel_educacion}}">
+                <input type="hidden" name="form-nahual" value="{{post_nahual}}">
+                <input type="hidden" name="form-estudia" value="{{post_estudia}}">
+                <input type="hidden" name="form-motivacion" value="{{post_motivacion}}">
+                <input type="hidden" name="form-intervencion" value="{{post_intervencion}}">
+                <input type="hidden" name="form-afectacion" value="{{post_afectacion}}">
+
+              <!--Hacer funcion para renderizar template y almacenar la info del form-->  
+              <div class="form-group" align="center">
+
+              <button type="submit" name="action" value="inscripcion2" class="btn btn-success">Siguiente</button>
+              <button type="button" name="action" value="cancelar" onclick="fnCancelar(form)" class="btn btn-primary">Cancelar</button>
+              </div>
+              <br>
+
+            </form>
+            </div>
+            </div><!--row-->
+          </div> <!--container-->
+       
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+ 
+ <script type="text/javascript">
+$(function() {
+  $('#form-fecha-nacimiento').datepicker({dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-100:+0'});
+});
+
+jQuery(document).ready(function($){
+      {% if post_nacionalidad %}
+      $('select.form-nacionalidad').find('option[value={{post_nacionalidad}}]').attr('selected','selected');
+    {% endif %}
+    {% if post_residencia %}
+      $('select.form-residencia').find('option[value={{post_residencia}}]').attr('selected','selected');
+    {% endif %}
+    {% if post_nodo %}
+      $('select.form-nodo').find('option[value={{post_nodo}}]').attr('selected','selected');
+    {% endif %}
+    {% if post_trabaja %}
+      $('select.form-trabajo').find('option[value={{post_trabaja}}]').attr('selected','selected');
+    {% endif %}
+});
+
+function fnCancelar(form){
+
+  var cancela = confirm("¿Seguro que desea cancelar su inscripción?")
+  if (cancela) {
+    window.location.href="{{url_for('index')}}";       
+    return false; 
+    } else {
+        return false;
+    } 
+  }
+  
+</script>   
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "layout.htm" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block body %}
+
+ 
+      <div class="container"> 
+               
+        <div class="row">
+ 
+          <div class="col-md-12">
+            <h1 id = "titulo1" class= "class-md text-center">Bienvenidos a Nahual</h1>
+            <br>
+
+            <h4 class="text-center" style="margin: 0 0 20px 0">Ingresar</h4>
+
+          <form role="form"  method="post" class="login-form" onsubmit="return fnValidateForm()" >
+
+
+
+                <div class="form-group">
+                  <label for="form-email">Usuario</label>
+                  <input type="email" name="form-email"  class="form-control" id="form-email" value="{{usuario}}" required>
+                  <small id="emailHelp" class="form-text text-muted">Ingrese el email registrado</small>
+
+                <div class="form-group">
+                  <label for="form-clave">Password</label>
+                  <input type="password" name="form-clave" class="form-control" id="form-clave" value="{{clave}}" required>
+
+                  <br>
+                  <br>
+                  <div align="center">
+                    <button type="submit"  name="action" value="login" class="btn btn-primary">Ingresar</button>
+                    <button type="button"  onclick="window.location.href='{{url_for('registrarUsuario')}}'" name="action" value="registrar" class="btn btn-primary" >Registrarse</button>
+                  </div>
+                </div>
+               
+                 
+          </form>
+        </div> <!--col-md-12-->
+
+        </div><!--row-->
+      </div> <!--container-->
+  
+
+<script type="text/javascript">
+    
+  /*
+   * Función para validar una dirección de correo
+   * Tiene que recibir el identificador del formulario
+   */
+ 
+  function fnValidateForm()
+  {
+
+      var username = document.getElementById("form-email").value;
+      var password = document.getElementById("form-clave").value;
+
+       if (username.length == 0){
+        alert("El usuario es obligatorio");
+        return false;
+      }
+      if (username.length < 5 ){
+        alert("El usuario debe ser de al menos 5 caracteres");
+        return false;  
+      }
+
+      if (password.length == 0){
+        alert("La clave es obligatorio");
+        return false;
+      }
+
+      if (password.length < 5){
+        alert("La clave debe ser de al menos 5 caracteres");
+        return false;  
+      }
+
+     return true;
+
+  }
+  //-->
+</script>
+ 
+{% endblock %}
