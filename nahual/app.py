@@ -1666,7 +1666,7 @@ def inscripcion2():
                                                                 , post_apellido = form_apellido 
                                                                 , post_email = form_email 
                                                                 , post_dni = form_dni 
-                                                                , post_fecha_nac = fecha_nac
+                                                                , post_fecha_nac = form_fecha_nac
                                                                 , post_nacionalidad = form_nacionalidad 
                                                                 , post_telefono = form_telefono 
                                                                 , post_residencia = form_residencia 
@@ -1783,8 +1783,10 @@ def inscripcion3():
                 )
                 session.add(nuevoAlumnoDB)
 
+                alumnoDB = session.query(Alumno).filter_by(alum_dni = request.form['form-dni']).first()
+                
                 nuevoAlumnoExpDB = Alumno_Experiencia (
-                alex_alum_dni = request.form['form-dni'],
+                alex_alum_id = alumnoDB.alum_id,
                 alex_trabajo  = bool(int(request.form['form-trabajo'])),
                 alex_trabajo_lugar = request.form['form-trabajo-lugar'],
                 alex_sistemas = bool(int(request.form['form-sistemas'])),
@@ -1797,7 +1799,7 @@ def inscripcion3():
                 session.add(nuevoAlumnoExpDB)
 
                 nuevoAlumnoEstudioDB = Alumno_Estudio (
-                ales_alum_dni = request.form['form-dni'],
+                ales_alum_id = alumnoDB.alum_id,
                 ales_nivel_educacion_id = request.form['form-nivel-educacion'],
                 ales_nahual = request.form['form-nahual'],
                 ales_estudia = bool(int(request.form['form-estudia']))
@@ -1806,7 +1808,6 @@ def inscripcion3():
             
                 session.commit()
 
-                
 
                 return redirect(url_for('finInscripcion'))
             
